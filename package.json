@@ -1,6 +1,6 @@
 {
   "name": "yaas-sdk",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Javascript YAAS SDK",
   "main": "lib/index.js",
   "scripts": {
@@ -24,5 +24,6 @@
   },
   "author": "Federico Pinna <fpinna@vivocha.com>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+  }
 }

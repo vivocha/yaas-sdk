@@ -3,17 +3,17 @@ export class YAAS_Client {
     this.token = token;
   }
   ws(path, method, query, body) {
+    return YAAS_Client.ws(path, method, query, body, this.token);
+  }
+  static ws(path, method, query, body, token) {
     var url = path;
     var opts = {
       method: (method || 'GET').toUpperCase(),
       mode: 'cors',
       credentials: 'omit',
-      headers: {
-        'Authorization': 'Bearer ' + this.token
-      }
+      headers: { }
     };
     if (query) {
-      console.log('query', query);
       var qs = [];
       for (var i in query) {
         qs.push(encodeURIComponent(i) + '=' + encodeURIComponent(query[i]));
@@ -29,9 +29,9 @@ export class YAAS_Client {
       opts.headers['Content-Type'] = 'application/json';
       opts.body = JSON.stringify(body);
     }
-
-    console.log('url', url);
-    console.log('opts', opts);
+    if (token) {
+      opts.headers['Authorization'] = 'Bearer ' + token;
+    }
 
     return fetch(url, opts).then(response => {
       if (response.ok) {
@@ -44,5 +44,14 @@ export class YAAS_Client {
         throw response.status;
       }
     });
+  }
+  static getAccessTokenFromCredentials(ep, clientId, clientSecret, scope) {
+    var body = [
+      "grant_type=client_credentials",
+      "scope=" + (scope && scope.join ? scope.join(' ') : scope || ''),
+      "client_id=" + clientId,
+      "client_secret=" + clientSecret
+    ].join('&');
+    return YAAS_Client.ws(ep, 'POST', null, body);
   }
 }

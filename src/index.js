@@ -16,4 +16,13 @@ export class YAAS_SDK {
     this.salesOrder = new SalesOrder(client, tenant);
     this.serviceTicket = new ServiceTicket(client, tenant);
   }
+  static createWithCredentials(tenant, clientId, clientSecret, scope) {
+    return YAAS_SDK.getAccessTokenFromCredentials(clientId, clientSecret, scope).then(function(data) {
+      return new YAAS_SDK(tenant, data.access_token);
+    });
+  }
+  static getAccessTokenFromCredentials(clientId, clientSecret, scope) {
+    var ep = 'https://api.yaas.io/hybris/oauth2/v1/token';
+    return YAAS_Client.getAccessTokenFromCredentials(ep, clientId, clientSecret, scope);
+  }
 }
