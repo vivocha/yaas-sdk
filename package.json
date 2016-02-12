@@ -1,10 +1,10 @@
 {
   "name": "yaas-sdk",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Javascript YAAS SDK",
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "babel --presets es2015 --source-maps --out-file index.js src/index.js && webpack"
+    "prepublish": "babel --presets es2015 --source-maps -d lib src && webpack"
   },
   "repository": {
     "type": "git",

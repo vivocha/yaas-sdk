@@ -4,6 +4,7 @@ import { Coupon } from './coupon';
 import { Customer } from './customer';
 import { Product } from './product';
 import { SalesOrder } from './salesorder';
+import { ServiceTicket } from './serviceticket';
 
 export class YAAS_SDK {
   constructor(tenant, token) {
@@ -13,5 +14,6 @@ export class YAAS_SDK {
     this.customer = new Customer(client, tenant);
     this.product = new Product(client, tenant);
     this.salesOrder = new SalesOrder(client, tenant);
+    this.serviceTicket = new ServiceTicket(client, tenant);
   }
 }
